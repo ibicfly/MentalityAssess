@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name />
+<listener>  
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+</listener>  
+  <context-param>  
+        <param-name>contextConfigLocation</param-name>  
+        <param-value>  
+            /WEB-INF/applicationContext.xml   
+        </param-value>  
+   </context-param> 
+<!-- 配置字符过滤器 -->
+ <filter>
+ 	<filter-name>EncodingFilter</filter-name>
+ 	<filter-class>com.xinlipinggu.filter.EncodingFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>EncodingFilter</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+ <!-- 配置用户验证过滤器 -->
+ <filter>
+ 	<filter-name>AdminFilter</filter-name>
+ 	<filter-class>com.xinlipinggu.filter.AdminFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>AdminFilter</filter-name>
+ 	<url-pattern>/administrator.do</url-pattern>
+ </filter-mapping>
+  <filter-mapping>
+ 	<filter-name>AdminFilter</filter-name>
+ 	<url-pattern>/administrator.jsp</url-pattern>
+ 	<url-pattern>/deleteUser.jsp</url-pattern>
+ 	<url-pattern>/searchUser.jsp</url-pattern>
+ 	<url-pattern>/modifyUser.jsp</url-pattern>
+ </filter-mapping>
+ 
+ <filter>
+ 	<filter-name>ManagerFilter</filter-name>
+ 	<filter-class>com.xinlipinggu.filter.ManagerFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>ManagerFilter</filter-name>
+ 	<url-pattern>/manager.do</url-pattern>
+ 	<url-pattern>/manager.jsp</url-pattern>
+ 	<url-pattern>/addProblem.jsp</url-pattern>
+ 	<url-pattern>/managerSu.jsp</url-pattern>
+ 	<url-pattern>/showProblems.jsp</url-pattern>
+ </filter-mapping>
+
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>3</param-value>
+    </init-param>
+    <init-param>
+      <param-name>detail</param-name>
+      <param-value>3</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>home.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+<!-- 		其实是你自己不够专心，才会这么觉得，其实跟原来没什么不同，自己不要在学习的时候有这种玻璃心，改 -->

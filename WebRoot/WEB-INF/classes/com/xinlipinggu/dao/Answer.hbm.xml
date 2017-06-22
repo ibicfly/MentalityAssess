@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.xinlipinggu.dao.Answer" >
+<id name="aId" type="integer">
+	<generator class="native"></generator>
+</id>
+<many-to-one name="problem" class="com.xinlipinggu.dao.Problem" 
+			 foreign-key="pId" column="pId"></many-to-one>
+<many-to-one name="user" class="com.xinlipinggu.dao.User"
+			 foreign-key="uId" column="uId"></many-to-one>
+<!-- 还差Boolean数组answers还没定义 -->
+<array name="answers">
+	 <key column="aId"/>  
+     <list-index column="a_index"/>  
+     <element type="boolean" column="answer"/>  
+</array>
+</class>
+
+</hibernate-mapping>

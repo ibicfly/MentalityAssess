@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+<!-- action -->
+<bean name="/login" class="com.xinlipinggu.struts.action.LoginAction"></bean>
+<bean name="/register" class="com.xinlipinggu.struts.action.RegisterAction"></bean>
+<bean name="/exit" class="com.xinlipinggu.struts.action.ExitAction"></bean>
+<bean name="/problem" class="com.xinlipinggu.struts.action.ProblemAction"></bean>
+<bean name="/administrator" class="com.xinlipinggu.struts.action.AdministratorAction"></bean>
+<bean name="/manager" class="com.xinlipinggu.struts.action.ManagerAction"></bean>
+<bean name="/question" class="com.xinlipinggu.struts.action.QuestionAction"></bean>
+
+<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+ 	<property name="dataSource">
+ 		<ref bean="dataSource" />
+ 	</property>
+ 	<property name="hibernateProperties">
+ 		<props>
+ 			<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+ 			<prop key="hibernate.show_sql">true</prop> 
+	 	    <prop key="hibernate.hbm2ddl.auto">update</prop> 
+ 		</props>		
+ 	</property>
+ 	 <property name="mappingResources">   
+              <list>   
+                  <!-- 以下用来列出所有的PO映射文件 -->   
+               <value>com/xinlipinggu/dao/User.hbm.xml</value>
+               <value>com/xinlipinggu/dao/Problem.hbm.xml</value>
+	           <value>com/xinlipinggu/dao/Question.hbm.xml</value>
+	           <value>com/xinlipinggu/dao/Answer.hbm.xml</value>
+             </list>   
+    </property>
+</bean>
+<bean id="dataSource"
+ class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"/>   
+	<!-- 指定连接数据库的URL -->   
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/xinlisys"/>   
+	<!-- 指定连接数据库的用户名 -->   
+	<property name="user" value="root"/>   
+	<!-- 指定连接数据库的密码 -->   
+	<property name="password" value="cyhcyh"/>   
+	<!-- 指定连接数据库连接池的最大连接数 -->   
+	<property name="maxPoolSize" value="40"/>   
+	<!-- 指定连接数据库连接池的最小连接数 -->   
+	<property name="minPoolSize" value="1"/>   
+	<!-- 指定连接数据库连接池的初始化连接数 -->   
+	<property name="initialPoolSize" value="1"/>   
+	<!-- 指定连接数据库连接池的连接最大空闲时间 -->   
+    <property name="maxIdleTime" value="20"/>   
+</bean>
+ <bean id="HibernateUtil" class="com.xinlipinggu.hibernate.HibernateUtil">
+ 	<property name="sessionFactory" ref="sessionFactory"></property>
+ </bean>
+ </beans>
+	

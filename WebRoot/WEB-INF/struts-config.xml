@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+ "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <data-sources />
+  <form-beans>
+  <form-bean name="UserForm" type="com.xinlipinggu.struts.form.UserForm"></form-bean>
+  <form-bean name="ProblemForm" type="com.xinlipinggu.struts.form.ProblemForm"></form-bean>
+  <form-bean name="QuestionForm" type="com.xinlipinggu.struts.form.QuestionForm"></form-bean>
+  </form-beans>
+  <global-exceptions />
+  <global-forwards >
+  	<forward name="error1" path="/error.jsp"></forward>
+  </global-forwards>
+  <action-mappings >
+  	<action path="/login" 
+  			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="UserForm"
+	>
+		<forward name="success" path="/loginSu.jsp"></forward>
+		<forward name="manager" path="/manager.jsp"></forward>
+		<forward name="administrator" path="/administrator.jsp"></forward>
+	</action>
+	<action path="/register"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="UserForm"
+	>
+		<forward name="success" path="/RegisterSu.jsp"></forward>
+		<forward name="existUser" path="/Register.jsp"></forward>
+	</action>
+	<action path="/exit"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			>
+			<forward name="exit" path="/"></forward>
+	</action>
+	<action path="/problem" 
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			>
+			<forward name="problemMain" path="/problemMain.jsp"></forward>
+	</action>
+	<action path="/administrator"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="type"
+			name="UserForm"
+	>
+		<forward name="modify" path="/modifyUser.jsp"></forward>
+		<forward name="search" path="/searchUser.jsp"></forward>
+		<forward name="delete" path="/deleteUser.jsp"></forward>
+	</action>
+	<action path="/manager"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="type"
+			name="ProblemForm"
+	>
+		<forward name="success" path="/managerSu.jsp"></forward>
+		<forward name="showProblems" path="/showProblems.jsp"></forward>
+		<forward name="editProblem" path="/editProblem.jsp"></forward>
+		<forward name="addProblem" path="/addProblem.jsp"></forward>
+	</action>
+	<action path="/question"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="type"
+			name="QuestionForm"
+	>
+		<forward name="addSu" path="/addQuestionSu.jsp"></forward>
+		<forward name="addError" path="/addQuestion.jsp"></forward>
+	</action>
+  </action-mappings>
+  <message-resources parameter="/" />
+</struts-config>

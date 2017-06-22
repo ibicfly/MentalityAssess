@@ -1,0 +1,25 @@
+#MyEclipse Hibernate Properties
+#Tue May 30 15:58:53 CST 2017
+sessionFactoryName=com.xinlipinggu.hibernate.HibernateSessionFactory
+genBasicCompId=false
+profile=
+daoSFId=
+version=3.1
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=/WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/MentalityAssess/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true
+baseDaoClass=
