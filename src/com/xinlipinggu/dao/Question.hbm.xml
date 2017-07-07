@@ -10,6 +10,6 @@
 	<property name="qindex" type="integer"></property>
 	<property name="qTitle" type="string"></property>
  	<many-to-one name="problem" class="com.xinlipinggu.dao.Problem"
-		foreign-key="pId" column="pId" ></many-to-one>
+		foreign-key="pId" column="pId" cascade="all"></many-to-one>
 </class>
 </hibernate-mapping>

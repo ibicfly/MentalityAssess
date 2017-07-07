@@ -12,7 +12,7 @@
 	<key column="pId"></key>
 	<one-to-many class="com.xinlipinggu.dao.Answer" />
 </set>
-<set name="questions" lazy="false" >
+<set name="questions" lazy="false" inverse="false" >
 	<key column="pId"></key>
 	<one-to-many class="com.xinlipinggu.dao.Question"/>
 </set>

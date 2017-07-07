@@ -6,9 +6,14 @@
   </head>
   <body>
 	<h1>${managerSu }</h1><br/>
+	<s_logic:notEmpty name="managerSu">
 	<s_logic:match value="添加成功" name="managerSu">
 		<a href="addQuestion.jsp?pId=${pId }&qindex=0">给${pTitle }添加问题</a><br/>
 	</s_logic:match>
+	<s_logic:match value="修改成功" name="managerSu">
+		<h2>修改成功</h2>
+	</s_logic:match>
+	</s_logic:notEmpty>
 	<a href="manager.jsp">返回管理员界面</a>
 <s_logic:notEmpty name="pagenow" >
 <a href="manager.do?type=showProblems&pagenow=${pagenow }">返回修改问题</a>

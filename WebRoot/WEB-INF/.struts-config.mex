@@ -6,6 +6,7 @@
   <StrutsActivity path="/problem.do" location="650,850" dimension="98,70" />
   <StrutsActivity path="/administrator.do" location="950,1250" dimension="362,104" />
   <StrutsActivity path="/manager.do" location="350,1450" dimension="100,70" />
+  <StrutsActivity path="/question.do" location="1250,1450" dimension="98,70" />
   <StrutsActivity path="error1;6" location="650,50" dimension="86,87" />
   <StrutsActivity path="/manager.jsp" location="650,1250" dimension="109,53" />
   <StrutsActivity path="/administrator.jsp" location="50,1150" dimension="135,53" />
@@ -22,9 +23,9 @@
   <StrutsActivity path="/managerSu.jsp" location="950,450" dimension="123,53" />
   <StrutsActivity path="/showProblems.jsp" location="350,1650" dimension="142,53" />
   <StrutsActivity path="/addQuestionSu.jsp" location="1550,750" dimension="146,53" />
+  <StrutsActivity path="/addQuestion.jsp" location="1550,350" dimension="132,53" />
   <StrutsActivity path="/error.jsp" location="50,350" dimension="87,53" />
   <StrutsActivity path="/add" location="1550,550" dimension="60,53" />
-  <StrutsActivity path="/addQuestion.jsp" location="1550,350" dimension="132,53" />
   <StrutsActivity path="/home.jsp" location="50,750" dimension="90,53" />
   <StrutsActivity path="error.jsp" location="950,50" dimension="82,53" />
   <StrutsActivity path="loginSu.jsp" location="650,250" dimension="95,53" />
@@ -37,7 +38,7 @@
   <StrutsActivity path="/addSu.jsp" location="1250,1050" dimension="94,53" />
   <StrutsActivity path="managerSu.jsp" location="650,1450" dimension="118,53" />
   <StrutsActivity path="/showProblems" location="50,1550" dimension="122,53" />
-  <StrutsActivity path="/question.do" location="1250,1450" dimension="98,70" />
+  <StrutsActivity path=" " location="1550,950" dimension="36,53" />
   <StrutsTransition id="/problem.do,problemMain,/problemMain.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="650,885" />
@@ -134,6 +135,14 @@
       <AbsolutePoint location="531,769" />
       <AbsolutePoint location="1302,769" />
       <AbsolutePoint location="1302,850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/manager.do,success, ,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="400,1450" />
+      <AbsolutePoint location="400,1418" />
+      <AbsolutePoint location="1568,1418" />
+      <AbsolutePoint location="1568,1003" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/question.do,addSu,/addQuestionSu.jsp,1" routingType="0">

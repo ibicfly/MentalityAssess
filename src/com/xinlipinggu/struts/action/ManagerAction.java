@@ -118,6 +118,7 @@ public class ManagerAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+//		接受要修改的问题，并从数据库中取出
 		ProblemForm prForm=(ProblemForm) form;
 		ProblemService service=new ProblemService();
 		Problem problem=new Problem();
@@ -136,20 +137,31 @@ public class ManagerAction extends DispatchAction {
 		{
 			System.out.println(question.getQindex()+question.getqTitle());
 		}
-
 		return mapping.findForward("editProblem");
 	}
+	
 	public ActionForward saveEdit(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+//		接受页面提交的有关Problem的信息，并进行修改
+		System.out.println("进入修改");
 		ProblemForm prForm=(ProblemForm) form;
 		ProblemService service=new ProblemService();
 		Problem problem=new Problem();
+		try {
 		problem.setpTitle(prForm.getpTitle());
 		problem.setpId(prForm.getpId());
 		request.setAttribute("pagenow", prForm.getPagenow());
 		service.update(problem);
+		request.setAttribute("managerSu","修改成功");  
 		return mapping.findForward("success");
+		} 
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			request.setAttribute("managerError", "修改失败");
+			return mapping.findForward("error");
+		}
 	}
 }
