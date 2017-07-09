@@ -8,22 +8,24 @@
   <head>
   </head>
   <body>
-  这个页面展示了所有的问题，采用分页技术
-  <table>
+	<jsp:include page="head.jsp"></jsp:include>  
+  	<table>
 	<tr><td>题目</td></tr>
 	<jstl:forEach var="problem" items="${problemList}" >
-		<tr><td>${problem.pTitle}</td>
+		<tr><td><a href="problem.do?type=test&pId=${problem.pId }">${problem.pTitle}</a>
+				</td>
 	</jstl:forEach>
 	</table>
 	<s_logic:greaterThan value="1" name="pagenow">
-	<a href="problem.do?pagenow=${pagenow-1}">上一页</a>
+	<a href="problem.do?type=showByPage&pagenow=${pagenow-1}">上一页</a>
 	</s_logic:greaterThan>
 	<jstl:forEach var="pagenum" begin="1" end="${pagecount}" >
-		<a href="problem.do?pagenow=${pagenum}">${pagenum}</a>
+		<a href="problem.do?type=showByPage&pagenow=${pagenum}">${pagenum}</a>
 	</jstl:forEach>
 	<s_logic:lessThan value="${pagecount}" name="pagenow">
-		<a href="problem.do?pagenow=${pagenow+1}">下一页</a>
+		<a href="problem.do?type=showByPage&pagenow=${pagenow+1}">下一页</a>
 	</s_logic:lessThan>
 	<a href="${window.location.host}${ pageContext.request.contextPath }">返回主页</a>
+	<jsp:include page="tail.jsp"></jsp:include>  
   </body>
 </html>

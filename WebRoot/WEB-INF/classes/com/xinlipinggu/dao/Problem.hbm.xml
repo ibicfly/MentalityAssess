@@ -8,14 +8,15 @@
 	<generator class="native"></generator>
 </id>
 <property name="pTitle" type="string"></property>
-<set name="answers" >
-	<key column="pId"></key>
+<set name="answers" inverse="false">
+	<key column="pId" ></key>
 	<one-to-many class="com.xinlipinggu.dao.Answer" />
 </set>
 <set name="questions" lazy="false" inverse="false" >
 	<key column="pId"></key>
 	<one-to-many class="com.xinlipinggu.dao.Question"/>
 </set>
+
 </class>
 
 </hibernate-mapping>

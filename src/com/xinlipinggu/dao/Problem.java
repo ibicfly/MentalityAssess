@@ -1,5 +1,6 @@
 package com.xinlipinggu.dao;
 
+import java.util.List;
 import java.util.Set;
 
 public class Problem {
@@ -7,17 +8,17 @@ public class Problem {
 	private String pTitle;
 	private Set answers;
 	private Set questions;
-	public Set getquestions() {
-		return questions;
-	}
-	public void setquestions(Set questions) {
-		this.questions = questions;
-	}
 	public Set getAnswers() {
 		return answers;
 	}
-	public void setanswers(Set answers) {
+	public void setAnswers(Set answers) {
 		this.answers = answers;
+	}
+	public Set getQuestions() {
+		return questions;
+	}
+	public void setQuestions(Set questions) {
+		this.questions = questions;
 	}
 	public int getpId() {
 		return pId;

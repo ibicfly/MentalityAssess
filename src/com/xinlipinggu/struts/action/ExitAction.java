@@ -18,9 +18,12 @@ public class ExitAction extends Action {
 			throws Exception {
 		// TODO Auto-generated method stub
 		request.getSession().invalidate();
+		if(request.getCookies()!=null)
+		{
 		for(Cookie temp:request.getCookies())
 		{
 			temp.setMaxAge(0);
+		}
 		}
 		return mapping.findForward("exit");
 	}

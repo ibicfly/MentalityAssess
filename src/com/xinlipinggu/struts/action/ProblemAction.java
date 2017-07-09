@@ -9,14 +9,15 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
 
 import com.xinlipinggu.dao.Problem;
 import com.xinlipinggu.service.ProblemService;
+import com.xinlipinggu.struts.form.ProblemForm;
 
-public class ProblemAction extends Action {
+public class ProblemAction extends DispatchAction{
 
-	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward showByPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
@@ -69,5 +70,17 @@ public class ProblemAction extends Action {
 		request.setAttribute("pagecount",pagecount);
 		request.setAttribute("problemList", list);	
 		return mapping.findForward("problemMain");
+	}
+	public ActionForward test(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("进入题目");
+		ProblemForm problemForm=(ProblemForm) form;
+		Problem problem=null;
+		
+		ProblemService problemService=new ProblemService();
+		problem=problemService.search(problemForm.getpId());
+		request.setAttribute("problem",problem);
+		return mapping.findForward("test");
 	}
 }

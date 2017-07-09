@@ -12,32 +12,37 @@ import com.xinlipinggu.hibernate.HibernateUtil;
 public class QuestionService {
 	public void add(Question question)
 	{
-			//这个是统一的添加方法
-			Session session=null;
-			Transaction transaction=null;
-			List list=null;
-			try {
-				session=HibernateUtil.openSession();
-				transaction=session.beginTransaction();
-				//直接将对象交给session进行处理就可以进行添加操作了，无需操心
-				session.save(question);
-				transaction.commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				if(transaction!=null)
-				{
-					transaction.rollback();
-				}
-				e.printStackTrace();
-			}finally{
-				if(session.isOpen()&&session!=null)
-				{
-					session.close();
-				}
-			}
+		HibernateUtil.save(question);
 	}
 	public void showQuestions(Problem problem)
 	{
 		
+	}
+	public void del(int qId)
+	{
+		String[] temp={qId+""};
+		HibernateUtil.executeUpdate("Delete Question where qId=?", temp);
+	}
+	public Question getQuestionByqId(int qId)
+	{
+		String[] temp={qId+""};
+		Question question=(Question) HibernateUtil.uniqueQuery("from Question where qId=?", temp);
+		return question;
+	}
+	public void update(Question question)
+	{
+		
+		String[] temp={question.getqTitle(),question.getQindex()+"",question.getqId()+""};
+		HibernateUtil.executeUpdate("Update Question set qTitle=?,qindex=? where qId=?", temp);
+	}
+	public Question queryByqIndex(int qIndex,int pId)
+	{
+		String[] temp={qIndex+"",pId+""};
+		Question question=null;
+		if(HibernateUtil.executeQuery("from Question where pId=? and qindex=?",temp)!=null)
+		{
+			question=(Question) HibernateUtil.executeQuery("from Question where pId=? and qindex=?",temp);
+		}
+		return question;
 	}
 }

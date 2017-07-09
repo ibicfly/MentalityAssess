@@ -10,6 +10,8 @@
 	<s_logic:notEmpty name="qindex">
 		<a href="addQuestion.jsp?pId=${pId}&qindex=${qindex+1}">继续添加</a><br/>
 	</s_logic:notEmpty>
+	<a href="manager.do?type=editProblem&pId=${pId }">回到problem</a>
+	
 	<a href="manager.jsp">返回管理员界面</a>
 <a href="exit.do">退出</a>
   </body>

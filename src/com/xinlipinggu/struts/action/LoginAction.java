@@ -56,7 +56,7 @@ public class LoginAction extends Action {
 				request.getSession().setAttribute("username",null);
 				request.setAttribute("error", "账号密码不匹配");
 				response.setCharacterEncoding("utf-8");
-				return mapping.findForward("error1");
+				return mapping.findForward("error");
 			}
 		}else
 		{
@@ -64,7 +64,7 @@ public class LoginAction extends Action {
 			request.getSession().setAttribute("username", null);
 			request.setAttribute("error", "账号不存在");
 			response.setCharacterEncoding("utf-8");
-			return mapping.findForward("error1");
+			return mapping.findForward("error");
 		}
 	}
 }

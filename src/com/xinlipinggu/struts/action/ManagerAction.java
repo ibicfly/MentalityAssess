@@ -123,15 +123,20 @@ public class ManagerAction extends DispatchAction {
 		ProblemService service=new ProblemService();
 		Problem problem=new Problem();
 		//从数据库通过pId查找problem
-		problem=service.search(prForm.getpId());
-		
-		System.out.println(problem.getquestions().size());
+		if(request.getParameter("pId")!=null)
+		{
+			problem=service.search(Integer.parseInt(request.getParameter("pId")));
+		}else
+		{
+			problem=service.search(prForm.getpId());
+		}
+		System.out.println(problem.getQuestions().size());
 		request.setAttribute("pagenow",prForm.getPagenow());
 		request.setAttribute("pId", problem.getpId());
 		request.setAttribute("pTitle",problem.getpTitle());
-		request.setAttribute("questions", problem.getquestions());
+		request.setAttribute("questions", problem.getQuestions());
 		
-		Set<Question> questions=problem.getquestions();
+		Set<Question> questions=problem.getQuestions();
 		
 		for(Question question:questions)
 		{
@@ -139,8 +144,7 @@ public class ManagerAction extends DispatchAction {
 		}
 		return mapping.findForward("editProblem");
 	}
-	
-	public ActionForward saveEdit(ActionMapping mapping, ActionForm form,
+	public ActionForward saveProblem(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
@@ -156,7 +160,7 @@ public class ManagerAction extends DispatchAction {
 		service.update(problem);
 		request.setAttribute("managerSu","修改成功");  
 		return mapping.findForward("success");
-		} 
+		}
 		catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

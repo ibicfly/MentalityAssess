@@ -28,14 +28,11 @@
   	{
   		document.getElementById("head_welcome").style.visibility='visible';
   		document.getElementById("head_register").style.visibility='hidden';
- 		
  		document.getElementById("head_login").style.visibility='hidden';
- 		
  	}else
  	{
  		document.getElementById("head_welcome").style.visibility='hidden';
  		document.getElementById("head_register").style.visibility='visible';
-  		
   		document.getElementById("head_login").style.visibility='visible';
   	}
   }
@@ -58,7 +55,7 @@
 	<span style="visibility: hidden" id="head_welcome">欢迎用户<a href="#">${sessionScope.username}</a></span>
 </div>
 <!-- navi -->
-<div class="navi"><a href="problem.do">心理小测试</a>
+<div class="navi"><a href="problem.do?type=showByPage">心理小测试</a>
 	 <a href="#">心理知识</a>
 	 <a href="#">心理探讨</a>  
 </div>

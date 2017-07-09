@@ -8,6 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
   </head>
+  
   <body>
+  删除成功
+     <a href="manager.do?type=editProblem&pId=${pId }">回到problem</a>
+  
   </body>
+  
 </html>

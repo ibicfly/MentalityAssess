@@ -7,10 +7,11 @@
   <form-bean name="UserForm" type="com.xinlipinggu.struts.form.UserForm"></form-bean>
   <form-bean name="ProblemForm" type="com.xinlipinggu.struts.form.ProblemForm"></form-bean>
   <form-bean name="QuestionForm" type="com.xinlipinggu.struts.form.QuestionForm"></form-bean>
+  <form-bean name="AnswerForm" type="com.xinlipinggu.struts.form.AnswerForm"></form-bean>
   </form-beans>
   <global-exceptions />
   <global-forwards >
-  	<forward name="error1" path="/error.jsp"></forward>
+  	<forward name="error" path="/error.jsp"></forward>
   </global-forwards>
   <action-mappings >
   	<action path="/login" 
@@ -33,11 +34,7 @@
 			>
 			<forward name="exit" path="/"></forward>
 	</action>
-	<action path="/problem" 
-			type="org.springframework.web.struts.DelegatingActionProxy"
-			>
-			<forward name="problemMain" path="/problemMain.jsp"></forward>
-	</action>
+
 	<action path="/administrator"
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="type"
@@ -64,6 +61,24 @@
 	>
 		<forward name="addSu" path="/addQuestionSu.jsp"></forward>
 		<forward name="addError" path="/addQuestion.jsp"></forward>
+		<forward name="updateSu" path="/updateSu.jsp"></forward>
+		<forward name="delSu" path="/delSu.jsp"></forward>
+		<forward name="modifyQuestion" path="/modifyQuestion.jsp"></forward>
+	</action>
+	<action path="/problem" 
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="type"
+			name="ProblemForm"
+			>
+			<forward name="problemMain" path="/problemMain.jsp"></forward>
+			<forward name="test" path="/test.jsp"></forward>
+	</action>
+	<action path="/answer"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="type"
+			name="AnswerForm"
+	>
+		<forward name="showResult" path="/showResult.jsp"></forward>
 	</action>
   </action-mappings>
   <message-resources parameter="/" />

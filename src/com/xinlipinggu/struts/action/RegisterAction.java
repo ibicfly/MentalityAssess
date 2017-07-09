@@ -38,8 +38,8 @@ public class RegisterAction extends Action {
 			return mapping.findForward("success");
 		}else
 		{
-			request.setAttribute("error1", "用户名密码不满足要求");
-			return mapping.findForward("error1");
+			request.setAttribute("error", "用户名密码不满足要求");
+			return mapping.findForward("error");
 		}
 	}
 	

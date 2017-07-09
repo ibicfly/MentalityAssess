@@ -12,6 +12,7 @@
 <bean name="/administrator" class="com.xinlipinggu.struts.action.AdministratorAction"></bean>
 <bean name="/manager" class="com.xinlipinggu.struts.action.ManagerAction"></bean>
 <bean name="/question" class="com.xinlipinggu.struts.action.QuestionAction"></bean>
+<bean name="/answer" class="com.xinlipinggu.struts.action.AnswerAction"></bean>
 
 <bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
