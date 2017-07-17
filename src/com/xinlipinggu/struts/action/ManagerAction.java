@@ -29,18 +29,21 @@ public class ManagerAction extends DispatchAction {
 		ProblemService service=new ProblemService();
 		ProblemForm problemForm=(ProblemForm) form;
 		//查重
+		System.out.println(service.search(problemForm.getpTitle()));
 		if(service.search(problemForm.getpTitle()))
 		{
+			System.out.println("该问题存在");
 			request.setAttribute("pTitle", problemForm.getpTitle());
 			request.setAttribute("p_exist", "该问题已存在");
 			return mapping.findForward("addProblem");
 		}else{
-		problem.setpTitle(problemForm.getpTitle());
-		service.add(problem);
-		request.setAttribute("managerSu", "添加成功");
-		request.setAttribute("pId",problem.getpId());
-		request.setAttribute("pTitle", problem.getpTitle());
-		return mapping.findForward("success");
+			System.out.println("该问题不存在");
+			problem.setpTitle(problemForm.getpTitle());
+			service.add(problem);
+			request.setAttribute("managerSu", "添加成功");
+			request.setAttribute("pId",problem.getpId());
+			request.setAttribute("pTitle", problem.getpTitle());
+			return mapping.findForward("success");
 		}
 	}	
 	public ActionForward showProblems(ActionMapping mapping, ActionForm form,
@@ -94,7 +97,13 @@ public class ManagerAction extends DispatchAction {
 		List<Problem> list=service.showByPage(pagenow, pagesize);
 		request.setAttribute("pagecount",pagecount);
 		request.setAttribute("problemList", list);
+		if(list==null||list.size()==0)
+		{
+		return mapping.findForward("error");
+		}else
+		{
 		return mapping.findForward("showProblems");
+		}
 	}
 	public ActionForward delete(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -122,9 +131,11 @@ public class ManagerAction extends DispatchAction {
 		ProblemForm prForm=(ProblemForm) form;
 		ProblemService service=new ProblemService();
 		Problem problem=new Problem();
-		//从数据库通过pId查找problem
+		
+//		从数据库通过pId查找problem
 		if(request.getParameter("pId")!=null)
 		{
+			request.getParameter("pId");
 			problem=service.search(Integer.parseInt(request.getParameter("pId")));
 		}else
 		{
@@ -134,13 +145,14 @@ public class ManagerAction extends DispatchAction {
 		request.setAttribute("pagenow",prForm.getPagenow());
 		request.setAttribute("pId", problem.getpId());
 		request.setAttribute("pTitle",problem.getpTitle());
-		request.setAttribute("questions", problem.getQuestions());
+		request.setAttribute("questions",problem.getQuestions());
 		
-		Set<Question> questions=problem.getQuestions();
+		List<Question> questions=problem.getQuestions();
 		
-		for(Question question:questions)
+		for(int i=0;i<questions.size();i++)
 		{
-			System.out.println(question.getQindex()+question.getqTitle());
+			Question question=questions.get(i);
+			System.out.println(i+question.getqTitle());
 		}
 		return mapping.findForward("editProblem");
 	}

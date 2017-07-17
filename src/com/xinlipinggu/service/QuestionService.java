@@ -18,30 +18,35 @@ public class QuestionService {
 	{
 		
 	}
-	public void del(int qId)
+	public Question search(int qId)
 	{
+		Question question=null;
 		String[] temp={qId+""};
-		HibernateUtil.executeUpdate("Delete Question where qId=?", temp);
+		question=(Question) HibernateUtil.uniqueQuery("from Question where qId=?",temp);
+		return question;
+	}
+
+	public void del(Question question)
+	{
+		HibernateUtil.delete(question);
 	}
 	public Question getQuestionByqId(int qId)
 	{
 		String[] temp={qId+""};
-		Question question=(Question) HibernateUtil.uniqueQuery("from Question where qId=?", temp);
+		Question question=(Question) HibernateUtil.uniqueQuery("from Question where qId=? order by qindex", temp);
 		return question;
 	}
 	public void update(Question question)
 	{
-		
-		String[] temp={question.getqTitle(),question.getQindex()+"",question.getqId()+""};
-		HibernateUtil.executeUpdate("Update Question set qTitle=?,qindex=? where qId=?", temp);
+		HibernateUtil.update(question);
 	}
 	public Question queryByqIndex(int qIndex,int pId)
 	{
-		String[] temp={qIndex+"",pId+""};
+		String[] temp={pId+"",qIndex+""};
 		Question question=null;
 		if(HibernateUtil.executeQuery("from Question where pId=? and qindex=?",temp)!=null)
 		{
-			question=(Question) HibernateUtil.executeQuery("from Question where pId=? and qindex=?",temp);
+			question=(Question) HibernateUtil.executeQuery("from Question where pId=? and qindex=?",temp).get(0);
 		}
 		return question;
 	}

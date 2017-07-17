@@ -7,9 +7,9 @@
 	<id name="qId" type="integer" >
 		<generator class="native"></generator>
 	</id>
-	<property name="qindex" type="integer"></property>
-	<property name="qTitle" type="string"></property>
+	<property name="qIndex" type="integer" not-null="false" ></property>
+	<property name="qTitle" type="string" not-null="false"></property>
  	<many-to-one name="problem" class="com.xinlipinggu.dao.Problem"
-		foreign-key="pId" column="pId" cascade="all"></many-to-one>
+		foreign-key="pId" not-null="false" ></many-to-one>
 </class>
 </hibernate-mapping>

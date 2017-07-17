@@ -34,7 +34,6 @@
 			>
 			<forward name="exit" path="/"></forward>
 	</action>
-
 	<action path="/administrator"
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="type"

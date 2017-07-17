@@ -11,8 +11,6 @@ function checkUsername()
 	var username=document.getElementById("r_username").value;
 	var patrn=/^[a-z,A-z][a-z,A-z,0-9]{5,31}/;
 	var warn=document.getElementById("r_warnu");
-	window.alert(patrn.exec(username));
-	window.alert(username);
 	if (!patrn.exec(username)) 
 	{warn.style.visibility='visible';passpession=false;}
 	else{ warn.style.visibility='hidden';passpession=true;}

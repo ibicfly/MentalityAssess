@@ -9,7 +9,7 @@ public class ProblemService {
 	public List showByPage(int pagenow,int pagesize)
 	{
 		List list=null;
-		list=HibernateUtil.executeQueryByPage("from Problem",null,pagenow, pagesize);
+		list=HibernateUtil.executeQueryByPage("from Problem ",null,pagenow,pagesize);
 		return list;
 	}
 	public void add(Problem problem)
@@ -29,8 +29,7 @@ public class ProblemService {
 	}
 	public void update(Problem problem)
 	{
-		String[] temp={problem.getpTitle(),problem.getpId()+""};
-		HibernateUtil.executeUpdate("Update Problem set pTitle=? where pId=?", temp);
+		HibernateUtil.update(problem);
 	}
 	public boolean search(String pTitle)
 	{

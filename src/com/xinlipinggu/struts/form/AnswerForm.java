@@ -6,20 +6,36 @@ import com.xinlipinggu.dao.Problem;
 import com.xinlipinggu.dao.User;
 
 public class AnswerForm extends ActionForm{
+	
 	private int aId;
-	private boolean[] answers;
+	private String[] answers;
 	private User user;
 	private Problem problem;
+	private String username;
+	private int pId;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public int getpId() {
+		return pId;
+	}
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
 	public int getaId() {
 		return aId;
 	}
 	public void setaId(int aId) {
 		this.aId = aId;
 	}
-	public boolean[] getAnswers() {
+	public String[] getAnswers() {
 		return answers;
 	}
-	public void setAnswers(boolean[] answers) {
+	public void setAnswers(String[] answers) {
 		this.answers = answers;
 	}
 	public User getUser() {

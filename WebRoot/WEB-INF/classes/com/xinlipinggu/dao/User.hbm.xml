@@ -9,7 +9,7 @@
 </id>
 <property name="username" column="username"></property>
 <property name="password" column="password"></property>
-<set name="answers" >
+<set name="answers" lazy="false">
 	<key column="uId"></key>
 	<one-to-many class="com.xinlipinggu.dao.Answer"  />
 </set>

@@ -6,7 +6,7 @@
   <head>
   </head>
   <body>
-	注册${qindex}号问题${pTitle }成功
+	注册${qindex}号问题${qTitle }成功
 	<s_logic:notEmpty name="qindex">
 		<a href="addQuestion.jsp?pId=${pId}&qindex=${qindex+1}">继续添加</a><br/>
 	</s_logic:notEmpty>

@@ -19,6 +19,13 @@ public class UserService {
 		User user=(User) HibernateUtil.uniqueQuery("from User where username=?",temp);
 		return user;
 	}
+	//通过用户id搜索用户
+	public User search(int uId)
+	{
+		String[] temp={uId+""};
+		User user=(User) HibernateUtil.uniqueQuery("from User where uId=?",temp);
+		return user;
+	}
 	public void del(String username)
 	{
 		String[] temp={username};

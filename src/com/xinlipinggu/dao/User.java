@@ -9,11 +9,11 @@ public class User {
 	private String username;
 	private String password;
 	private int uId;
-	private Set answers;
-	public Set getanswers() {
+	private Set<Answer> answers;
+	public Set<Answer> getAnswers() {
 		return answers;
 	}
-	public void setanswers(Set answers) {
+	public void setAnswers(Set<Answer> answers) {
 		this.answers = answers;
 	}
 	public String getUsername() {

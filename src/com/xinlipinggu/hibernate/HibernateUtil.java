@@ -194,7 +194,7 @@ public class HibernateUtil {
 			{
 				transaction.rollback();
 			}
-			throw new RuntimeException(e.getMessage());
+			e.printStackTrace();
 		}finally{
 			if(session.isOpen()&&session!=null)
 			{
@@ -220,7 +220,7 @@ public class HibernateUtil {
 			{
 				transaction.rollback();
 			}
-			throw new RuntimeException(e.getMessage());
+			e.printStackTrace();
 		}finally{
 			if(session.isOpen()&&session!=null)
 			{
@@ -228,6 +228,29 @@ public class HibernateUtil {
 			}
 		}
 		return list;
+	}
+	public static void update(Object object) {
+		Session session=null;
+		Transaction transaction=null;
+		try {
+			session=openSession();
+			transaction=session.beginTransaction();
+			//直接将对象交给session进行处理就可以进行更新对象
+			session.update(object);
+			transaction.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(transaction!=null)
+			{
+				transaction.rollback();
+			}
+			throw new RuntimeException(e.getMessage());
+		}finally{
+			if(session.isOpen()&&session!=null)
+			{
+				session.close();
+			}
+		}
 	}
 	public static List addQuestion(Object object) {
 		//这个是统一的添加方法
@@ -288,4 +311,57 @@ public class HibernateUtil {
 				}
 			}
 }	
+	public static List save(Object one,Object many) {
+		//这个是统一的添加方法
+		Session session=null;
+		Transaction transaction=null;
+		List list=null;
+		try {
+			session=openSession();
+			transaction=session.beginTransaction();
+			//直接将对象交给session进行处理就可以进行添加操作了，无需操心
+			session.save(one);
+			transaction.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(transaction!=null)
+			{
+				transaction.rollback();
+			}
+			throw new RuntimeException(e.getMessage());
+		}finally{
+			if(session.isOpen()&&session!=null)
+			{
+				session.close();
+			}
+		}
+		return list;
+	}
+	public static void delete(Object object) {
+		//这个是统一的添加方法
+		Session session=null;
+		Transaction transaction=null;
+		List list=null;
+		try {
+			session=openSession();
+			transaction=session.beginTransaction();
+			//直接将对象交给session进行处理就可以进行添加操作了，无需操心
+			session.delete(object);
+			transaction.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(transaction!=null)
+			{
+				transaction.rollback();
+			}
+			throw new RuntimeException(e.getMessage());
+		}finally{
+			if(session.isOpen()&&session!=null)
+			{
+				session.close();
+			}
+		}
+	}
 }
+
+

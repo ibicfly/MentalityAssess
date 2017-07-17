@@ -1,5 +1,7 @@
 package com.xinlipinggu.struts.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,37 +26,51 @@ public class QuestionAction extends DispatchAction{
 		QuestionService questionService=new QuestionService();
 		ProblemService problemService=new ProblemService();
 		
+		Problem problem=problemService.search(questionForm.getpId());
+		List<Question> questions=problem.getQuestions();
+
 		//新建Question并赋值
 		Question question=new Question();
-		question.setQindex(questionForm.getQindex());
-		question.setqId(questionForm.getqId());
 		question.setqTitle(questionForm.getqTitle());
-		
-	
-		if(problemService.search(questionForm.getpId())!=null)
+		question.setqIndex(questionForm.getQindex());
+		//若存在问题
+		if(problem!=null)
 		{
 			//在这里取得problem,并进行设置
-			question.setProblem(problemService.search(questionForm.getpId()));
-			
+			question.setProblem(problem);
+			System.out.println("\n\n"+"id"+question.getqId()+"index"+
+					question.getqIndex()+"title"+question.getqTitle()+"problem"+question.getProblem());
+					
 			//如果qindex重复,则将原题更新为现在的题目
-			if(questionService.queryByqIndex(question.getQindex(),question.getProblem().getpId())!=null)
+			if(problem.getQuestions()!=null&&problem.getQuestions().size()!=0&&
+				problem.getQuestions().size()>questionForm.getQindex()&&
+				(questionService.queryByqIndex(questionForm.getQindex(), questionForm.getpId()))!=null)
 			{
-				questionService.update(question);
+				System.out.println("重复");
+				//得到现今存在的question,并删除
+				Question exist=questionService.queryByqIndex
+						(questionForm.getQindex(), questionForm.getpId());
+				exist.setqIndex(question.getqIndex());
+				exist.setqTitle(question.getqTitle());
+				questionService.update(exist);
 			}else
 			{
+				System.out.println("未重复");
 				questionService.add(question);
+				questions.add(question);
+				problem.setQuestions(questions);
+				problemService.update(problem);
 			}
-			request.setAttribute("pId", questionForm.getpId());
-			request.setAttribute("qindex", questionForm.getQindex());
-			request.setAttribute("pTitle", question.getProblem().getpTitle());
-			System.out.println("添加"+question.getQindex()+"号question");
+			request.setAttribute("pId", problem.getpId());
+			request.setAttribute("qindex", question.getqIndex());
+			request.setAttribute("qTitle", question.getqTitle());
+			request.setAttribute("pTitle", problem.getpTitle());
 			return mapping.findForward("addSu");
 		}else
 		{
 			return mapping.findForward("addError");
 		}
 	}
-
 	public ActionForward editQuestion(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -62,14 +78,16 @@ public class QuestionAction extends DispatchAction{
 		QuestionForm questionForm=(QuestionForm) form;
 		QuestionService service=new QuestionService();
 		ProblemService problemService=new ProblemService();
+		Problem problem=problemService.search(questionForm.getpId());
 		
 		Question  question=new Question();
 		question.setqId(questionForm.getqId());
 		question.setqTitle(questionForm.getqTitle());
-		question.setQindex(questionForm.getQindex());
-		question.setProblem(problemService.search(questionForm.getpId()));
-		service.update(question);
+		question.setqIndex(questionForm.getQindex());
+		question.setProblem(problem);
+		problem.getQuestions().set(questionForm.getQindex(),question);
 		
+		service.update(question);
 		System.out.println("更新完成");
 		request.setAttribute("pId", question.getProblem().getpId());
 	return mapping.findForward("updateSu");
@@ -81,10 +99,9 @@ public class QuestionAction extends DispatchAction{
 		System.out.println();
 		QuestionForm questionForm=(QuestionForm) form;
 		QuestionService service=new QuestionService();
-		
 		Question  question=new Question();
 		if(request.getParameter("qId")!=null)
-		{		
+		{	
 			question=service.getQuestionByqId(Integer.parseInt(request.getParameter("qId")));
 			request.setAttribute("question", question);
 		}
@@ -95,13 +112,22 @@ public class QuestionAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("删除question");
-		
 		QuestionForm questionForm=(QuestionForm) form;
 		QuestionService service=new QuestionService();
 		ProblemService problemService=new ProblemService();
 		
-		service.del(questionForm.getqId());
-		
+		try {
+			service.del(service.search(questionForm.getqId()));
+
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("删除出错");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("删除出错");
+		}
 		System.out.println("删除完成");
 		request.setAttribute("pId", questionForm.getpId());
 		return mapping.findForward("updateSu");

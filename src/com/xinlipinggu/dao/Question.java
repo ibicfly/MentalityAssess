@@ -2,20 +2,21 @@ package com.xinlipinggu.dao;
 
 public class Question {
 	private int qId;
-	private int qindex;
+	private int qIndex;
 	private String qTitle;
 	private Problem problem;
+	
+	public int getqIndex() {
+		return qIndex;
+	}
+	public void setqIndex(int qIndex) {
+		this.qIndex = qIndex;
+	}
 	public int getqId() {
 		return qId;
 	}
 	public void setqId(int qId) {
 		this.qId = qId;
-	}
-	public int getQindex() {
-		return qindex;
-	}
-	public void setQindex(int qindex) {
-		this.qindex = qindex;
 	}
 	public String getqTitle() {
 		return qTitle;

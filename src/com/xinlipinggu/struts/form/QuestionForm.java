@@ -40,5 +40,4 @@ public class QuestionForm extends ActionForm {
 	public void setpId(int pId) {
 		this.pId = pId;
 	}
-	
 }

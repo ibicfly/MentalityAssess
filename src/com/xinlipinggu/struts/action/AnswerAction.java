@@ -7,6 +7,15 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.hibernate.Hibernate;
+
+import com.xinlipinggu.dao.Answer;
+import com.xinlipinggu.dao.Problem;
+import com.xinlipinggu.dao.User;
+import com.xinlipinggu.service.AnswerService;
+import com.xinlipinggu.service.ProblemService;
+import com.xinlipinggu.service.UserService;
+import com.xinlipinggu.struts.form.AnswerForm;
 
 public class AnswerAction extends DispatchAction {
 
@@ -15,8 +24,42 @@ public class AnswerAction extends DispatchAction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("成功进入提交答案界面");
+		AnswerForm answerForm=(AnswerForm) form;
+		ProblemService problemService=new ProblemService();
+		UserService userService=new UserService();
+		AnswerService answerService=new AnswerService();
 		
-		return null;
+		Answer answer=new Answer();
+		Problem problem=null;
+		User user=null;
+		
+		String[] answers=answerForm.getAnswers();
+		try
+		{
+			answer.setAnswers(answers);
+			
+			System.out.println(answerForm.getpId());
+			problem=problemService.search(answerForm.getpId());
+			answer.setProblem(problem);
+			if(userService.search(answerForm.getUsername())!=null)
+			{
+				user=userService.search(answerForm.getUsername());
+				System.out.println("找到用户"+user.getUsername());
+				answer.setUser(user);
+				user.getAnswers().add(answer);
+			}else
+			{
+				answer.setUser(null);
+			}
+		}finally
+		{
+			answerService.save(answer);
+			problem.getAnswerSet().add(answer);
+		}
+		
+		request.setAttribute("answer",answer);
+		request.setAttribute("problem", problem);
+		
+		return mapping.findForward("showResult");
 	}
-	
 }

@@ -8,14 +8,13 @@
 	<generator class="native"></generator>
 </id>
 <many-to-one name="problem" class="com.xinlipinggu.dao.Problem" 
-			 foreign-key="pId" column="pId"></many-to-one>
+			 foreign-key="pId" column="pId" ></many-to-one>
 <many-to-one name="user" class="com.xinlipinggu.dao.User"
-			 foreign-key="uId" column="uId"></many-to-one>
-<!-- 还差Boolean数组answers还没定义 -->
-<array name="answers">
+			 foreign-key="uId" column="uId" not-null="false"></many-to-one>
+<array name="answers" cascade="all">
 	 <key column="aId"/>  
      <list-index column="a_index"/>  
-     <element type="boolean" column="answer"/>  
+     <element type="string" column="answer" />  
 </array>
 </class>
 

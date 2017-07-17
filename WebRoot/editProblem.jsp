@@ -15,7 +15,7 @@
   	<table style="border-style: solid;border-color: red;">
 	<a href="addQuestion.jsp?pId=${pId }&qindex=0">添加question</a><br/>
   	<jstl:forEach var="question" items="${questions}">
-  		<tr><td>${question.qindex }</td>
+  		<tr><td>${question.qIndex }</td>
   		<td>
   		<input type="text" value="${question.qTitle}" name=""/></td>
   		<td><a href="question.do?type=delQuestion&qId=${question.qId}&pId=${question.problem.pId}" onclick="return confirm('是否确认删除')">删除question</a></td>

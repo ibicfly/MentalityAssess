@@ -9,7 +9,7 @@
 	修改question
 	<form action="question.do?type=editQuestion" method="post">
 		小问题题目<input type="text" name="qTitle" value="${question.qTitle }"/>
-		题号(从0开始)<input type="text" name="qindex" value="${question.qindex}"/>
+		题号(从0开始)<input type="text" name="qindex" value="${question.qIndex}"/>
 		<input type="hidden" name="pId" value="${question.problem.pId}"/>
 		<input type="submit" value="提交Question"/>
 	</form>

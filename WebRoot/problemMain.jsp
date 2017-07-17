@@ -16,6 +16,7 @@
 				</td>
 	</jstl:forEach>
 	</table>
+	
 	<s_logic:greaterThan value="1" name="pagenow">
 	<a href="problem.do?type=showByPage&pagenow=${pagenow-1}">上一页</a>
 	</s_logic:greaterThan>

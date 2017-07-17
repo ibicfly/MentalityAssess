@@ -2,7 +2,7 @@ package com.xinlipinggu.dao;
 
 public class Answer {
 	private int aId;
-	private boolean[] answers;
+	private String[] answers;
 	private User user;
 	private Problem problem;
 	public int getaId() {
@@ -11,10 +11,10 @@ public class Answer {
 	public void setaId(int aId) {
 		this.aId = aId;
 	}
-	public boolean[] getAnswers() {
+	public String[] getAnswers() {
 		return answers;
 	}
-	public void setAnswers(boolean[] answers) {
+	public void setAnswers(String[] answers) {
 		this.answers = answers;
 	}
 	public User getUser() {

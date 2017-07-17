@@ -6,18 +6,18 @@ import java.util.Set;
 public class Problem {
 	private int pId;
 	private String pTitle;
-	private Set answers;
-	private Set questions;
-	public Set getAnswers() {
-		return answers;
+	private Set<Answer> answerSet;
+	private List<Question> questions;
+	public Set<Answer> getAnswerSet() {
+		return answerSet;
 	}
-	public void setAnswers(Set answers) {
-		this.answers = answers;
+	public void setAnswerSet(Set<Answer> answerSet) {
+		this.answerSet = answerSet;
 	}
-	public Set getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(Set questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 	public int getpId() {
@@ -32,5 +32,4 @@ public class Problem {
 	public void setpTitle(String pTitle) {
 		this.pTitle = pTitle;
 	}
-	
 }
