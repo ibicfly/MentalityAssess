@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import com.xinlipinggu.dao.User;
 import com.xinlipinggu.service.UserService;
 import com.xinlipinggu.struts.form.UserForm;
-import com.xinlipinggu.test.HibernateTest;
 
 public class LoginAction extends Action {
 
