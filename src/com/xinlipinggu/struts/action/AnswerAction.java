@@ -18,6 +18,14 @@ import com.xinlipinggu.service.UserService;
 import com.xinlipinggu.struts.form.AnswerForm;
 
 public class AnswerAction extends DispatchAction {
+	private UserService userservice;
+	public UserService getUserservice() {
+		return userservice;
+	}
+
+	public void setUserservice(UserService userservice) {
+		this.userservice = userservice;
+	}
 
 	public ActionForward upAnswer(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +34,6 @@ public class AnswerAction extends DispatchAction {
 		System.out.println("成功进入提交答案界面");
 		AnswerForm answerForm=(AnswerForm) form;
 		ProblemService problemService=new ProblemService();
-		UserService userService=new UserService();
 		AnswerService answerService=new AnswerService();
 		
 		Answer answer=new Answer();
@@ -37,13 +44,12 @@ public class AnswerAction extends DispatchAction {
 		try
 		{
 			answer.setAnswers(answers);
-			
 			System.out.println(answerForm.getpId());
 			problem=problemService.search(answerForm.getpId());
 			answer.setProblem(problem);
-			if(userService.search(answerForm.getUsername())!=null)
+			if(userservice.search(answerForm.getUsername())!=null)
 			{
-				user=userService.search(answerForm.getUsername());
+				user=userservice.search(answerForm.getUsername());
 				System.out.println("找到用户"+user.getUsername());
 				answer.setUser(user);
 				user.getAnswers().add(answer);

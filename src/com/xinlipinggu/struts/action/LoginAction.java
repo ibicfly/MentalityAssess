@@ -14,7 +14,14 @@ import com.xinlipinggu.service.UserService;
 import com.xinlipinggu.struts.form.UserForm;
 
 public class LoginAction extends Action {
+	private UserService userservice;
+	public UserService getUserservice() {
+		return userservice;
+	}
 
+	public void setUserservice(UserService userservice) {
+		this.userservice = userservice;
+	}
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -24,8 +31,7 @@ public class LoginAction extends Action {
 		//表单取得用户信息
 		UserForm userForm=(UserForm)form;
 		//对用户进行查询
-		UserService service=new UserService();
-		User user=service.search(userForm.getUsername());
+		User user=userservice.search(userForm.getUsername());
 //		用户名密码验证成功
 		if(user!=null)
 		{

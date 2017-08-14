@@ -19,15 +19,21 @@ import com.xinlipinggu.struts.form.UserForm;
 
 
 public class AdministratorAction extends DispatchAction {
+	private UserService userservice;
+	public UserService getUserservice() {
+		return userservice;
+	}
+	public void setUserservice(UserService userservice) {
+		this.userservice = userservice;
+	}
 	public ActionForward modify(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
 		//在这里准备以分页的方式取得所有用户，并通过request提交
-		UserService service=new UserService();
 		int pagenow=1;	
 		int pagesize=3;
-		int rowcount=service.count();
+		int rowcount=userservice.count();
 		int pagecount=0;
 		//判断页数
 		if(rowcount%pagesize==0)
@@ -69,7 +75,7 @@ public class AdministratorAction extends DispatchAction {
 		{
 			request.setAttribute("pagesize", pagesize);
 		}
-		List<User> list=service.queryByPage(pagenow, pagesize);
+		List<User> list=userservice.queryByPage(pagenow, pagesize);
 		request.setAttribute("pagecount",pagecount);
 		request.setAttribute("userlist", list);
 		return mapping.findForward("modify");
@@ -79,11 +85,10 @@ public class AdministratorAction extends DispatchAction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		UserForm userForm=(UserForm) form;
-		UserService service=new UserService();
 		User user=null;
-		if(service.search(userForm.getUsername())!=null)
+		if(userservice.search(userForm.getUsername())!=null)
 		{
-			user=service.search(userForm.getUsername());
+			user=userservice.search(userForm.getUsername());
 			request.setAttribute("searchRes", user);
 			request.setAttribute("noUser", null);
 			return mapping.findForward("search");
@@ -98,8 +103,7 @@ public class AdministratorAction extends DispatchAction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		UserForm userForm=(UserForm) form;
-		UserService service=new UserService();
-		service.del(userForm.getUsername());
+		userservice.del(userForm.getUsername());
 		int pagenow=userForm.getPagenow();
 		request.setAttribute("pagenow", pagenow);
 		return mapping.findForward("delete");

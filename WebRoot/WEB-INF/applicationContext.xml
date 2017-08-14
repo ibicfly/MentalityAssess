@@ -3,16 +3,21 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
-<!-- action -->
-<bean name="/login" class="com.xinlipinggu.struts.action.LoginAction"></bean>
-<bean name="/register" class="com.xinlipinggu.struts.action.RegisterAction"></bean>
-<bean name="/exit" class="com.xinlipinggu.struts.action.ExitAction"></bean>
-<bean name="/problem" class="com.xinlipinggu.struts.action.ProblemAction"></bean>
-<bean name="/administrator" class="com.xinlipinggu.struts.action.AdministratorAction"></bean>
-<bean name="/manager" class="com.xinlipinggu.struts.action.ManagerAction"></bean>
-<bean name="/question" class="com.xinlipinggu.struts.action.QuestionAction"></bean>
-<bean name="/answer" class="com.xinlipinggu.struts.action.AnswerAction"></bean>
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	">
+<context:component-scan base-package="com.xinlipinggu.service"></context:component-scan>
+<context:component-scan base-package="com.xinlipinggu.test"></context:component-scan>
 
 <bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -22,7 +27,7 @@
  	<property name="hibernateProperties">
  		<props>
  			<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
- 			<prop key="hibernate.show_sql">true</prop> 
+ 			<prop key="hibernate.show_sql">false</prop> 
 	 	    <prop key="hibernate.hbm2ddl.auto">update</prop> 
  		</props>		
  	</property>
@@ -36,6 +41,7 @@
              </list>   
     </property>
 </bean>
+<!-- 使用了c3p0连接池进行管理数据连接 -->
 <bean id="dataSource"
  class="com.mchange.v2.c3p0.ComboPooledDataSource">
 	<property name="driverClass" value="com.mysql.jdbc.Driver"/>   
@@ -54,8 +60,42 @@
 	<!-- 指定连接数据库连接池的连接最大空闲时间 -->   
     <property name="maxIdleTime" value="20"/>   
 </bean>
- <bean id="HibernateUtil" class="com.xinlipinggu.hibernate.HibernateUtil">
+<bean id="HibernateUtil" class="com.xinlipinggu.hibernate.HibernateUtil">
  	<property name="sessionFactory" ref="sessionFactory"></property>
  </bean>
- </beans>
+<bean id="HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean id="UserService" class="com.xinlipinggu.service.UserService">
+	<property name="hibernateTemplate" ref="HibernateTemplate"></property>
+</bean>
+<bean id="ValidateAdmin" class="com.xinlipinggu.aop.ValidateAdmin">
+</bean>
+<aop:config>
+	<aop:aspect ref="ValidateAdmin">
+		<aop:pointcut expression="execution(* com.xinlipinggu.service.UserService.*(..))"
+		 id="userServicePoint"/>
+		<aop:before method="addAdmin" pointcut-ref="userServicePoint"/>
+		<aop:before method="addMannager" pointcut-ref="userServicePoint"/>
+	</aop:aspect>
+</aop:config>
+<!-- action -->
+<bean name="/login" class="com.xinlipinggu.struts.action.LoginAction">
+	<property name="userservice" ref="UserService"></property>
+</bean>
+<bean name="/register" class="com.xinlipinggu.struts.action.RegisterAction">
+	<property name="userservice" ref="UserService"></property>
+</bean>
+<bean name="/exit" class="com.xinlipinggu.struts.action.ExitAction"></bean>
+<bean name="/problem" class="com.xinlipinggu.struts.action.ProblemAction"></bean>
+<bean name="/administrator" class="com.xinlipinggu.struts.action.AdministratorAction">
+	<property name="userservice" ref="UserService"></property>
+</bean>
+<bean name="/manager" class="com.xinlipinggu.struts.action.ManagerAction"></bean>
+<bean name="/question" class="com.xinlipinggu.struts.action.QuestionAction"></bean>
+<bean name="/answer" class="com.xinlipinggu.struts.action.AnswerAction">
+	<property name="userservice" ref="UserService"></property>
+</bean>
+
+</beans>
 	

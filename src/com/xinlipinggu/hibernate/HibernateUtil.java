@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
+	//在这个文件内是模仿了spring的hibernateTemplate来通过hibernate进行持久化操作
 	private static SessionFactory sessionFactory;
 	
 	public  SessionFactory getSessionFactory() {

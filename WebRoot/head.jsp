@@ -56,8 +56,9 @@
 </div>
 <!-- navi -->
 <div class="navi"><a href="problem.do?type=showByPage">心理小测试</a>
-	 <a href="#">心理知识</a>
-	 <a href="#">心理探讨</a>  
+<!-- 	 <a href="#">心理知识</a>
+	 <a href="#">心理探讨</a>
+	  -->  
 </div>
   </body>
 </html>

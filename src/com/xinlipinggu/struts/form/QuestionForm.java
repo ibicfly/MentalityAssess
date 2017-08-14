@@ -3,7 +3,6 @@ package com.xinlipinggu.struts.form;
 import org.apache.struts.action.ActionForm;
 
 import com.xinlipinggu.dao.Problem;
-
 public class QuestionForm extends ActionForm {
 	private int qId;
 	private int qindex;
