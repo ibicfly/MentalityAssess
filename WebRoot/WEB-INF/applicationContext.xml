@@ -96,6 +96,5 @@
 <bean name="/answer" class="com.xinlipinggu.struts.action.AnswerAction">
 	<property name="userservice" ref="UserService"></property>
 </bean>
-
 </beans>
 	
