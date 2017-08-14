@@ -2,16 +2,9 @@ package com.xinlipinggu.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Component;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import com.xinlipinggu.dao.User;
 import com.xinlipinggu.hibernate.HibernateUtil;
-import com.xinlipinggu.temp.AddMannager;
 public class UserService {
 	private HibernateTemplate hibernateTemplate;
 	public HibernateTemplate getHibernateTemplate() {
@@ -64,8 +57,5 @@ public class UserService {
 //		 HibernateUtil.count("from User where username not in(?,?)",temp);
 		return (Integer) hibernateTemplate.find("select count(*) from User where username not in(?,?)"
 				,"administrator","manager").iterator().next();
-	}
-	static
-	{			
 	}
 }
